@@ -1,10 +1,18 @@
-import { pluginElectron } from 'rsbuild-plugin-electron';
+import path from 'node:path';
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
-import path from 'node:path';
+import { pluginElectron } from 'rsbuild-plugin-electron';
 
 export default defineConfig({
-  plugins: [pluginElectron(), pluginReact()],
+  plugins: [
+    pluginElectron({
+      main: {
+        entry: './src/main/main.ts',
+      },
+      preload: './src/preload/preload.ts',
+    }),
+    pluginReact(),
+  ],
   source: {
     entry: {
       index: './src/renderer/index.tsx',

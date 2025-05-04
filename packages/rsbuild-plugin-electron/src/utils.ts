@@ -1,9 +1,9 @@
+import type { AddressInfo } from 'node:net';
 import type {
   NormalizedConfig,
   RsbuildConfig,
   RsbuildDevServer,
 } from '@rsbuild/core';
-import type { AddressInfo } from 'node:net';
 
 export function resolveServerUrl(
   server: RsbuildDevServer,
