@@ -1,6 +1,6 @@
+import cp from 'node:child_process';
 import type { AddressInfo } from 'node:net';
 import type { NormalizedConfig, RsbuildDevServer } from '@rsbuild/core';
-import cp from 'node:child_process';
 
 export function resolveServerUrl(
   server: RsbuildDevServer,

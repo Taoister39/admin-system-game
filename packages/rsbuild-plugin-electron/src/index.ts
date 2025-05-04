@@ -1,6 +1,6 @@
+import type { ChildProcess } from 'node:child_process';
 import type { BuildOptions, RsbuildPlugin } from '@rsbuild/core';
 import { resolveServerUrl, treeKillSync } from 'src/utils.js';
-import type { ChildProcess } from 'node:child_process';
 
 declare global {
   namespace NodeJS {
