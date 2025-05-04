@@ -9,7 +9,9 @@ export default defineConfig({
       main: {
         entry: './src/main/main.ts',
       },
-      preload: './src/preload/preload.ts',
+      preload: {
+        input: './src/preload/preload.ts',
+      },
     }),
     pluginReact(),
   ],
@@ -21,6 +23,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve('./src'),
+      '@main': path.resolve('./src/main'),
+      '@common': path.resolve('./src/common'),
     },
   },
 });

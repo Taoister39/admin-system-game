@@ -26,9 +26,9 @@
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "rsbuild-plugin-electron": "workspace:*",
+    "simple-git-hooks": "^2.13.0",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.0",
-    "simple-git-hooks": "^2.13.0"
+    "typescript-eslint": "^8.29.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint:write",

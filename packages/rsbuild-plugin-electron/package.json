@@ -17,7 +17,8 @@
   "files": ["dist"],
   "scripts": {
     "build": "rslib build",
-    "dev": "rslib build --watch"
+    "dev": "rslib build --watch",
+    "prepare": "pnpm build"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
