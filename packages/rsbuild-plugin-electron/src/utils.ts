@@ -1,6 +1,8 @@
 import cp from 'node:child_process';
 import type { AddressInfo } from 'node:net';
 import type { NormalizedConfig, RsbuildDevServer } from '@rsbuild/core';
+import path from 'node:path';
+import fs from 'node:fs';
 
 export function resolveServerUrl(
   server: RsbuildDevServer,
@@ -24,6 +26,16 @@ export function resolveServerUrl(
       : `${protocol}://${hostname}:${port}${path}`;
 
     return url;
+  }
+}
+
+export function resolvePackageJson<T>(root = process.cwd()): T | null {
+  const packageJsonPath = path.join(root, 'package.json');
+  const packageJsonStr = fs.readFileSync(packageJsonPath, 'utf8');
+  try {
+    return JSON.parse(packageJsonStr);
+  } catch {
+    return null;
   }
 }
 

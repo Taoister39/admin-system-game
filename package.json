@@ -2,6 +2,7 @@
   "name": "admin-system-game",
   "private": true,
   "version": "0.1.0",
+  "main": "./dist-electron/main.js",
   "scripts": {
     "build": "rsbuild build",
     "dev": "rsbuild dev",

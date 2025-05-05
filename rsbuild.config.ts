@@ -22,7 +22,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve('./src'),
+      '@': path.resolve('./src/renderer'),
       '@main': path.resolve('./src/main'),
       '@common': path.resolve('./src/common'),
     },

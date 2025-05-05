@@ -1,6 +1,16 @@
 import type { ChildProcess } from 'node:child_process';
-import type { BuildOptions, RsbuildPlugin } from '@rsbuild/core';
-import { resolveServerUrl, treeKillSync } from 'src/utils.js';
+import {
+  createRsbuild,
+  rspack,
+  type BuildOptions,
+  type RsbuildPlugin,
+} from '@rsbuild/core';
+import {
+  resolvePackageJson,
+  resolveServerUrl,
+  treeKillSync,
+} from 'src/utils.js';
+import path from 'node:path';
 
 declare global {
   namespace NodeJS {
@@ -83,14 +93,42 @@ export const pluginElectron = (
           runner.onstart.call(this, {
             startup,
             reload() {
-              // TODO
+              if (process.electronApp) {
+                // (server.hot || server.ws).send({ type: 'full-reload' });
 
-              console.log('reload electron renderer');
+                // For Electron apps that don't need to use the renderer process.
+                startup.send('electron-rsbuild&type=hot-reload');
+              } else {
+                startup();
+              }
             },
           });
         } else {
           startup();
         }
+
+        const esmodule =
+          resolvePackageJson<{ type: 'module' | 'commonjs' }>()?.type ===
+          'module';
+
+        const compiler = rspack({
+          entry: runner.entry,
+          resolve: {
+            aliasFields: [],
+            conditionNames: ['node'],
+            mainFields: ['module', 'jsnext:main', 'jsnext'],
+          },
+          output: {
+            path: path.resolve(process.cwd(), 'dist-electron'),
+            chunkFormat: esmodule ? 'module' : 'commonjs',
+            chunkFilename: () => '[name].js',
+          },
+          target: runner.entry ? 'electron-main' : 'electron-preload',
+        });
+
+        compiler.run((err, stats) => {
+          console.log('rsbuild-plugin-electron', 'build', err, stats);
+        });
       }
     });
 
