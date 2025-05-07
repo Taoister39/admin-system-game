@@ -1,10 +1,6 @@
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { BrowserWindow, app } from 'electron';
-
-const require = createRequire(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
 //
@@ -15,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │ │ ├── main.js
 // │ │ └── preload.js
 // │
-process.env.APP_ROOT = path.join(__dirname, '..', '..');
+process.env.APP_ROOT = path.join(__dirname, '..');
 
 export const RSBUILD_DEV_SERVER_URL = process.env.RSBUILD_DEV_SERVER_URL;
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron');
