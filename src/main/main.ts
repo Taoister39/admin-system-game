@@ -13,9 +13,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │ │
 // │ ├─┬ dist-electron
 // │ │ ├── main.js
-// │ │ └── preload.mjs
+// │ │ └── preload.js
 // │
-process.env.APP_ROOT = path.join(__dirname, '..');
+process.env.APP_ROOT = path.join(__dirname, '..', '..');
 
 export const RSBUILD_DEV_SERVER_URL = process.env.RSBUILD_DEV_SERVER_URL;
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron');
@@ -24,7 +24,11 @@ export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist');
 let win: BrowserWindow;
 
 function createWindow() {
-  win = new BrowserWindow();
+  win = new BrowserWindow({
+    webPreferences: {
+      preload: path.join(MAIN_DIST, 'preload.js'),
+    },
+  });
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
