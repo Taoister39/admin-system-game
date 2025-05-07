@@ -1,6 +1,6 @@
 {
   "name": "rsbuild-plugin-electron",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": "https://github.com/rspack-contrib/rsbuild-plugin-template",
   "license": "MIT",
   "type": "module",
@@ -9,12 +9,13 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./electron-env": "./electron-env.d.ts"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": ["dist", "electron-env.d.ts"],
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",

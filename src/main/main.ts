@@ -24,6 +24,12 @@ function createWindow() {
     webPreferences: {
       preload: path.join(MAIN_DIST, 'preload.js'),
     },
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#001529',
+      symbolColor: '#69b1ff',
+      height: 29,
+    },
   });
 
   // Test active push message to Renderer-process.

@@ -2,14 +2,6 @@ import type { ChildProcess } from 'node:child_process';
 import type { RsbuildDevServer, RsbuildPlugin } from '@rsbuild/core';
 import { resolveServerUrl, treeKillSync } from 'src/utils.js';
 
-declare global {
-  namespace NodeJS {
-    interface Process {
-      electronApp?: ChildProcess;
-    }
-  }
-}
-
 export const PLUGIN_ELECTRON_NAME = 'rsbuild-plugin-electron';
 
 export const pluginElectron = (): RsbuildPlugin => ({
@@ -22,7 +14,7 @@ export const pluginElectron = (): RsbuildPlugin => ({
     api.onBeforeStartDevServer(({ server }) => {
       devServer = server;
     });
-    api.onAfterStartDevServer(({ port, routes }) => {
+    api.onAfterStartDevServer(() => {
       const rsbuildConfig = api.getNormalizedConfig();
       // because at the same runtime
       Object.assign(process.env, {
