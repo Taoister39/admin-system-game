@@ -1,6 +1,6 @@
 import type { ChildProcess } from 'node:child_process';
-import type { RsbuildPlugin } from '@rsbuild/core';
-import { treeKillSync } from 'src/utils.js';
+import type { RsbuildDevServer, RsbuildPlugin } from '@rsbuild/core';
+import { resolveServerUrl, treeKillSync } from 'src/utils.js';
 
 declare global {
   namespace NodeJS {
@@ -18,14 +18,15 @@ export const pluginElectron = (): RsbuildPlugin => ({
   setup(api) {
     // rsbuild dev
 
+    let devServer: RsbuildDevServer;
+    api.onBeforeStartDevServer(({ server }) => {
+      devServer = server;
+    });
     api.onAfterStartDevServer(({ port, routes }) => {
-      console.log('this port is: ', port);
-      console.log('this routes is: ', routes);
-
+      const rsbuildConfig = api.getNormalizedConfig();
       // because at the same runtime
       Object.assign(process.env, {
-        // TODO: according to rsbuild
-        RSBUILD_DEV_SERVER_URL: `http://127.0.0.1:${port}`,
+        RSBUILD_DEV_SERVER_URL: resolveServerUrl(devServer, rsbuildConfig),
       });
 
       startup();
