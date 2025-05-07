@@ -28,7 +28,9 @@ export const pluginElectron = (): RsbuildPlugin => ({
       Object.assign(process.env, {
         RSBUILD_DEV_SERVER_URL: resolveServerUrl(devServer, rsbuildConfig),
       });
+    });
 
+    api.onAfterEnvironmentCompile(() => {
       startup();
     });
 
