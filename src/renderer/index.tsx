@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Application from './layout/Application';
 import { HashRouter } from 'react-router-dom';
+import Application from '@/layout/Application';
 import './index.css';
 
 const rootEl = document.getElementById('root');
