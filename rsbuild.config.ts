@@ -13,6 +13,16 @@ export default defineConfig({
   },
   server: {
     port: 7712,
+    printUrls(params) {
+      const home = params.routes.find((route) => route.entryName === 'index');
+
+      // TODO: The pathname always distPath
+      if (home) {
+        home.pathname = '/';
+      }
+
+      return params.urls;
+    },
   },
   environments: {
     web: {
@@ -21,9 +31,6 @@ export default defineConfig({
         entry: {
           index: './src/renderer/index.tsx',
         },
-      },
-      output: {
-        target: 'web',
       },
     },
     node: {

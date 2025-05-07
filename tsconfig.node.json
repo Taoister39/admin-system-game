@@ -10,5 +10,5 @@
       "@common/*": ["./src/common/*"]
     }
   },
-  "include": ["src/main", "rsbuild.config.ts"]
+  "include": ["src/main", "src/common", "rsbuild.config.ts"]
 }

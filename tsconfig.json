@@ -22,7 +22,7 @@
       "@common/*": ["./src/common/*"]
     }
   },
-  "include": ["src/renderer"],
+  "include": ["src/renderer", "src/common"],
   "references": [
     {
       "path": "./tsconfig.node.json"
