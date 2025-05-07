@@ -1,7 +1,7 @@
+import TitleBar from '@/layout/TitleBar';
 import { HomeOutlined, RestOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Link, useRoutes } from 'react-router-dom';
-import TitleBar from '@/layout/TitleBar';
 
 function Application() {
   const routerElements = useRoutes([

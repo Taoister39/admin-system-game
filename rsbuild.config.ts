@@ -11,9 +11,6 @@ export default defineConfig({
       '@common': path.resolve('./src/common'),
     },
   },
-  dev: {
-    writeToDisk: true,
-  },
   server: {
     port: 7712,
   },
@@ -37,10 +34,13 @@ export default defineConfig({
           preload: './src/main/preload.ts',
         },
       },
+      dev: {
+        writeToDisk: true,
+      },
       output: {
         target: 'node',
         distPath: {
-          root: 'dist-electron',
+          root: './dist-electron',
         },
       },
       tools: {
