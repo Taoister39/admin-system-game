@@ -7,8 +7,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve('./src/renderer'),
-      '@main': path.resolve('./src/main'),
-      '@common': path.resolve('./src/common'),
     },
   },
   server: {
@@ -32,9 +30,19 @@ export default defineConfig({
           index: './src/renderer/index.tsx',
         },
       },
+      resolve: {
+        alias: {
+          '@common': path.resolve('./src/common'),
+        },
+      },
     },
     node: {
       plugins: [pluginElectron()],
+      resolve: {
+        alias: {
+          '@main': path.resolve('./src/main'),
+        },
+      },
       source: {
         entry: {
           main: './src/main/main.ts',
