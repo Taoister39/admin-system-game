@@ -22,8 +22,10 @@ export const pluginElectron = (): RsbuildPlugin => ({
       });
     });
 
-    api.onAfterEnvironmentCompile(() => {
-      startup();
+    api.onAfterEnvironmentCompile(({ isWatch }) => {
+      if (isWatch) {
+        startup();
+      }
     });
 
     // rsbuild build
