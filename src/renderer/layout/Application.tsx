@@ -1,14 +1,11 @@
 import TitleBar from '@/layout/TitleBar';
+import { applicationRoutes } from '@/routes/application';
 import { HomeOutlined, RestOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Link, useRoutes } from 'react-router-dom';
 
 function Application() {
-  const routerElements = useRoutes([
-    {
-      path: '/',
-    },
-  ]);
+  const routerElements = useRoutes(applicationRoutes);
 
   if (!routerElements) {
     return null;
