@@ -1,10 +1,10 @@
 {
   "name": "admin-system-game",
-  "private": true,
   "version": "0.1.0",
   "main": "./dist-electron/main.js",
+  "repository": "https://github.com/Taoister39/admin-system-game",
   "scripts": {
-    "build": "rsbuild build",
+    "build": "rsbuild build && electron-builder",
     "dev": "rsbuild dev",
     "preview": "rsbuild preview",
     "lint": "biome check .",
@@ -27,6 +27,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
     "electron": "^36.1.0",
+    "electron-builder": "^26.0.12",
     "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "rsbuild-plugin-electron": "workspace:*",

@@ -1,7 +1,6 @@
 {
   "name": "rsbuild-plugin-electron",
   "version": "0.0.1",
-  "repository": "https://github.com/rspack-contrib/rsbuild-plugin-template",
   "license": "MIT",
   "type": "module",
   "exports": {
