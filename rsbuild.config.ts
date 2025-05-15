@@ -4,11 +4,6 @@ import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginElectron } from 'rsbuild-plugin-electron';
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': path.resolve('./src/renderer'),
-    },
-  },
   server: {
     port: 7712,
     printUrls(params) {
@@ -32,7 +27,7 @@ export default defineConfig({
       },
       resolve: {
         alias: {
-          '@common': path.resolve('./src/common'),
+          '@': path.resolve('./src/renderer'),
         },
       },
     },
