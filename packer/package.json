@@ -1,10 +1,13 @@
 {
-  "name": "admin-system-game",
+  "name": "packer",
   "version": "0.1.0",
   "main": "./dist-electron/main.js",
   "scripts": {
     "build": "electron-builder"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "electron": "^36.1.0",
+    "electron-builder": "^26.0.12"
+  }
 }

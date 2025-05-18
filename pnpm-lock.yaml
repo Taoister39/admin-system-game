@@ -48,9 +48,6 @@ importers:
       electron:
         specifier: ^36.1.0
         version: 36.1.0
-      electron-builder:
-        specifier: ^26.0.12
-        version: 26.0.12(electron-builder-squirrel-windows@26.0.12)
       rsbuild-plugin-electron:
         specifier: workspace:*
         version: link:packages/rsbuild-plugin-electron
@@ -82,7 +79,14 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
-  packer: {}
+  packer:
+    devDependencies:
+      electron:
+        specifier: ^36.1.0
+        version: 36.1.0
+      electron-builder:
+        specifier: ^26.0.12
+        version: 26.0.12(electron-builder-squirrel-windows@26.0.12)
 
 packages:
 
@@ -2747,7 +2751,7 @@ snapshots:
 
   '@electron/universal@2.0.1':
     dependencies:
-      '@electron/asar': 3.2.18
+      '@electron/asar': 3.4.1
       '@malept/cross-spawn-promise': 2.0.0
       debug: 4.4.0
       dir-compare: 4.2.0

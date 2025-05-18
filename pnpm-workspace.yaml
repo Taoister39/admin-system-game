@@ -5,4 +5,5 @@ onlyBuiltDependencies:
   - '@biomejs/biome'
   - core-js
   - electron
+  - electron-winstaller
   - simple-git-hooks

@@ -26,7 +26,6 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
     "electron": "^36.1.0",
-    "electron-builder": "^26.0.12",
     "rsbuild-plugin-electron": "workspace:*",
     "simple-git-hooks": "^2.13.0",
     "typescript": "^5.8.2"

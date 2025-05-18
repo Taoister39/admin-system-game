@@ -34,6 +34,7 @@ export default defineConfig({
         distPath: {
           root: './packer/dist',
         },
+        assetPrefix: 'auto',
       },
     },
     node: {
