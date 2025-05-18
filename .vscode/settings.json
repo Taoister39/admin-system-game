@@ -9,11 +9,17 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.defaultFormatter": "biomejs.biome",
-  "cSpell.words": ["RSBUILD", "Rspack"],
+  "cSpell.words": [
+    "RSBUILD",
+    "Rspack"
+  ],
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
   }
 }

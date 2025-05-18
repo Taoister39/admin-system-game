@@ -6,9 +6,8 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@main/*": ["./src/main/*"],
-      "@common/*": ["./src/common/*"]
+      "@main/*": ["./src/main/*"]
     }
   },
-  "include": ["src/main", "src/common", "rsbuild.config.ts"]
+  "include": ["src/main", "rsbuild.config.ts"]
 }

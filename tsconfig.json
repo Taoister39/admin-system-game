@@ -18,11 +18,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["./src/renderer/*"],
-      "@common/*": ["./src/common/*"]
+      "@/*": ["./src/renderer/*"]
     }
   },
-  "include": ["src/renderer", "src/common"],
+  "include": ["src/renderer"],
   "references": [
     {
       "path": "./tsconfig.node.json"

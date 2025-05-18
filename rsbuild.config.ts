@@ -30,6 +30,11 @@ export default defineConfig({
           '@': path.resolve('./src/renderer'),
         },
       },
+      output: {
+        distPath: {
+          root: './packer/dist',
+        },
+      },
     },
     node: {
       plugins: [pluginElectron()],
@@ -50,7 +55,7 @@ export default defineConfig({
       output: {
         target: 'node',
         distPath: {
-          root: './dist-electron',
+          root: './packer/dist-electron',
         },
       },
       tools: {

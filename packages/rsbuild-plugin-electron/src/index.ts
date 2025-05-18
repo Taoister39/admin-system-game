@@ -1,6 +1,5 @@
-import type { ChildProcess } from 'node:child_process';
 import type { RsbuildDevServer, RsbuildPlugin } from '@rsbuild/core';
-import { resolveServerUrl, treeKillSync } from 'src/utils.js';
+import { resolveServerUrl, treeKillSync } from './utils.js';
 
 export const PLUGIN_ELECTRON_NAME = 'rsbuild-plugin-electron';
 
@@ -37,12 +36,12 @@ export const pluginElectron = (): RsbuildPlugin => ({
 /**
  * Electron App startup function.
  * It will mount the Electron App child-process to `process.electronApp`.
- * @param argv default value `['.', '--no-sandbox']`
+ * @param argv default value `['./packer', '--no-sandbox']`
  * @param options options for `child_process.spawn`
  * @param customElectronPkg custom electron package name (default: 'electron')
  */
 export async function startup(
-  argv = ['.', '--no-sandbox'],
+  argv = ['./packer', '--no-sandbox'],
   options?: import('node:child_process').SpawnOptions,
   customElectronPkg?: string,
 ) {
