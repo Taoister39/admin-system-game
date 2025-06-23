@@ -1,9 +1,21 @@
 packages:
   - packages/*
   - packer
+
 onlyBuiltDependencies:
-  - '@biomejs/biome'
+  - "@biomejs/biome"
   - core-js
   - electron
   - electron-winstaller
   - simple-git-hooks
+
+catalogs:
+  packer:
+    electron: ^36.1.0
+    "electron-builder": ^26.0.12
+
+catalog:
+  "@rsbuild/core": ^1.3.16
+  "@rslib/core": ^0.6.8
+  "@types/node": ^22.15.3
+  typescript: ^5.8.3
