@@ -9,7 +9,7 @@
     "lint": "biome check .",
     "lint:write": "biome check . --write",
     "prepare": "simple-git-hooks",
-    "test": "rstest"
+    "test": "rstest run"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",

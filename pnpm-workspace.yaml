@@ -15,7 +15,7 @@ catalogs:
     "electron-builder": ^26.0.12
 
 catalog:
-  "@rsbuild/core": ^1.3.16
-  "@rslib/core": ^0.6.8
+  "@rsbuild/core": ^1.3.22
+  "@rslib/core": ^0.10.2
   "@types/node": ^22.15.3
   typescript: ^5.8.3
