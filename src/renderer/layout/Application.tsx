@@ -2,9 +2,18 @@ import TitleBar from '@/layout/TitleBar';
 import { applicationRoutes } from '@/routes/application';
 import { HomeOutlined, RestOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+import { createStyles } from 'antd-style';
 import { Link, useRoutes } from 'react-router-dom';
 
+const useStyles = createStyles(() => ({
+  container: {
+    height: '100vh',
+    width: '100%',
+  },
+}));
+
 function Application() {
+  const { styles } = useStyles();
   const routerElements = useRoutes(applicationRoutes);
 
   if (!routerElements) {
@@ -12,12 +21,7 @@ function Application() {
   }
 
   return (
-    <Layout
-      style={{
-        height: '100vh',
-        width: '100%',
-      }}
-    >
+    <Layout className={styles.container}>
       <TitleBar />
       <Layout>
         <Layout.Sider>
