@@ -1,29 +1,14 @@
-# Rsbuild project
+# admin-system-game
 
-## Setup
+Admin System Game is my idea for dashboard product turns into game.Currently under development...
 
-Install the dependencies:
+## Devolvement
 
 ```bash
 pnpm install
-```
-
-## Get started
-
-Start the dev server:
-
-```bash
 pnpm dev
 ```
 
-Build the app for production:
+## License
 
-```bash
-pnpm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
-```
+GPL-3.0 License. See [License here](./LICENSE) for details.

@@ -1,4 +1,9 @@
 import path from 'node:path';
+import {
+  OVERLAY_COLOR,
+  OVERLAY_HEIGHT,
+  OVERLAY_SYMBOL_COLOR,
+} from '@common/constants/base_window';
 import { BrowserWindow, app } from 'electron';
 
 // The built directory structure
@@ -25,9 +30,9 @@ function createWindow() {
     },
     titleBarStyle: 'hidden',
     titleBarOverlay: {
-      color: '#001529',
-      symbolColor: '#69b1ff',
-      height: 29,
+      color: OVERLAY_COLOR,
+      symbolColor: OVERLAY_SYMBOL_COLOR,
+      height: OVERLAY_HEIGHT,
     },
   });
 
