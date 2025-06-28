@@ -32,7 +32,7 @@ function createWindow() {
     titleBarOverlay: {
       color: OVERLAY_COLOR,
       symbolColor: OVERLAY_SYMBOL_COLOR,
-      height: OVERLAY_HEIGHT,
+      height: 29, // the smallest size of the title bar on windows accounting for the border on windows 11
     },
   });
 

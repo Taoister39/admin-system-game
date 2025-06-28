@@ -1,8 +1,13 @@
-import FarmPage from '@/pages/Farm';
-import HomePage from '@/pages/Home';
+import type { ReactNode } from 'react';
 import { Navigate, type RouteObject } from 'react-router-dom';
 
-export const applicationRoutes: RouteObject[] = [
+import FarmPage from '@/pages/Farm';
+import HomePage from '@/pages/Home';
+import { HomeOutlined, RestOutlined } from '@ant-design/icons';
+
+type IRoute = RouteObject & { label?: string; icon?: ReactNode };
+
+export const applicationRoutes: IRoute[] = [
   {
     path: '/',
     element: <Navigate to="home" />,
@@ -10,9 +15,13 @@ export const applicationRoutes: RouteObject[] = [
   {
     path: '/home',
     element: <HomePage />,
+    label: 'Label-Home',
+    icon: <HomeOutlined />,
   },
   {
     path: '/farm',
     element: <FarmPage />,
+    label: 'Label-Farm',
+    icon: <RestOutlined />,
   },
 ];

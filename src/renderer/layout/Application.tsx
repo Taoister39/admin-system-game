@@ -1,9 +1,10 @@
 import TitleBar from '@/layout/TitleBar';
 import { applicationRoutes } from '@/routes/application';
-import { HomeOutlined, RestOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { type MenuProps, Layout, Menu } from 'antd';
 import { createStyles } from 'antd-style';
-import { Link, useRoutes } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, useLocation, useRoutes } from 'react-router-dom';
 
 const useStyles = createStyles(() => ({
   container: {
@@ -15,6 +16,25 @@ const useStyles = createStyles(() => ({
 function Application() {
   const { styles } = useStyles();
   const routerElements = useRoutes(applicationRoutes);
+  const { t } = useTranslation();
+
+  const location = useLocation();
+
+  const menuItems = useMemo<MenuProps['items']>(() => {
+    return applicationRoutes.reduce<Required<MenuProps>['items']>(
+      (acc, item) => {
+        if (item.path && item.label) {
+          acc.push({
+            key: item.path,
+            icon: item.icon,
+            label: <Link to={item.path}>{t(item.label)}</Link>,
+          });
+        }
+        return acc;
+      },
+      [],
+    );
+  }, [t]);
 
   if (!routerElements) {
     return null;
@@ -27,18 +47,8 @@ function Application() {
         <Layout.Sider>
           <Menu
             theme="dark"
-            items={[
-              {
-                label: <Link to="/">Home</Link>,
-                key: '/',
-                icon: <HomeOutlined />,
-              },
-              {
-                label: <Link to="/farm">Farm</Link>,
-                key: '/farm',
-                icon: <RestOutlined />,
-              },
-            ]}
+            items={menuItems}
+            selectedKeys={[location.pathname]}
           />
         </Layout.Sider>
         <Layout.Content>{routerElements}</Layout.Content>
