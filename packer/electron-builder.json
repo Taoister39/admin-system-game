@@ -1,7 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "appId": "com.taoister39.town-office",
+  "productName": "小镇事务所",
+  "artifactName": "town-office-${version}-win-${arch}.${ext}",
   "directories": {
     "output": "release/${version}"
   },
-  "files": ["dist", "dist-electron"]
+  "files": ["dist", "dist-electron"],
+  "extraFiles": [{ "from": "../LICENSE", "to": "LICENSE" }],
+  "win": { "target": [{ "target": "portable", "arch": ["x64"] }] }
 }

@@ -1,3 +1,36 @@
-body {
+/* Global document reset only. Component styles belong in their antd-style hooks. */
+html,
+body,
+#root {
+  height: 100%;
   margin: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, "Microsoft YaHei", system-ui, sans-serif;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }

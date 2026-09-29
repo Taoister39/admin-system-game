@@ -1,70 +1,59 @@
 import path from 'node:path';
-import {
-  OVERLAY_COLOR,
-  OVERLAY_HEIGHT,
-  OVERLAY_SYMBOL_COLOR,
-} from '@common/constants/base_window';
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, ipcMain } from 'electron';
+import { createSaveStore } from './saveStore';
 
-// The built directory structure
-//
-// ├─┬─┬ dist
-// │ │ └── index.html
-// │ │
-// │ ├─┬ dist-electron
-// │ │ ├── main.js
-// │ │ └── preload.js
-// │
-process.env.APP_ROOT = path.join(__dirname, '..');
-
-export const RSBUILD_DEV_SERVER_URL = process.env.RSBUILD_DEV_SERVER_URL;
-export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron');
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist');
-
-let win: BrowserWindow;
+const root = path.join(__dirname, '..');
+const developmentUrl = process.env.RSBUILD_DEV_SERVER_URL;
+const testDirectory = process.env.TOWN_OFFICE_TEST_DATA;
+if (!app.isPackaged && testDirectory && path.isAbsolute(testDirectory)) {
+  app.setPath('userData', testDirectory);
+}
+const windows = new Set<BrowserWindow>();
 
 function createWindow() {
-  win = new BrowserWindow({
+  const window = new BrowserWindow({
+    show: !(testDirectory && !app.isPackaged),
+    width: 1400,
+    height: 960,
+    minWidth: 860,
+    minHeight: 640,
+    title: '小镇事务所',
+    backgroundColor: '#f5f6f8',
     webPreferences: {
-      preload: path.join(MAIN_DIST, 'preload.js'),
+      preload: path.join(root, 'dist-electron/preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true,
     },
     titleBarStyle: 'hidden',
-    titleBarOverlay: {
-      color: OVERLAY_COLOR,
-      symbolColor: OVERLAY_SYMBOL_COLOR,
-      height: 29, // the smallest size of the title bar on windows accounting for the border on windows 11
-    },
+    titleBarOverlay: { color: '#ffffff', symbolColor: '#39465b', height: 36 },
   });
-
-  // Test active push message to Renderer-process.
-  win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', new Date().toLocaleString());
+  windows.add(window);
+  window.on('closed', () => windows.delete(window));
+  window.setMenuBarVisibility(false);
+  window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  window.webContents.on('will-navigate', (event, url) => {
+    if (url.split('#')[0] !== window.webContents.getURL().split('#')[0])
+      event.preventDefault();
   });
-
-  if (RSBUILD_DEV_SERVER_URL) {
-    win.loadURL(RSBUILD_DEV_SERVER_URL);
-  } else {
-    // win.loadFile('dist/index.html')
-    win.loadFile(path.join(RENDERER_DIST, 'index.html'));
-  }
+  if (developmentUrl) window.loadURL(developmentUrl);
+  else window.loadFile(path.join(root, 'dist/index.html'));
 }
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+app.whenReady().then(() => {
+  const store = createSaveStore(path.join(app.getPath('userData'), 'saves'));
+  ipcMain.handle('game:load', () => store.load());
+  ipcMain.handle('game:save', (_event, raw: unknown) => {
+    if (typeof raw !== 'string') throw new Error('存档须为文本数据。');
+    return store.save(raw);
+  });
+  ipcMain.handle('game:backup', () => store.backup());
+  ipcMain.handle('game:location', () => store.location);
+  createWindow();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-    win = null;
-  }
+  if (process.platform !== 'darwin') app.quit();
 });
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-
-app.whenReady().then(createWindow);

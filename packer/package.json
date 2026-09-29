@@ -1,6 +1,9 @@
 {
   "name": "packer",
   "version": "0.1.0",
+  "description": "以管理系统为界面的离线经营养成游戏",
+  "author": "Taoister39",
+  "license": "GPL-3.0-only",
   "main": "./dist-electron/main.js",
   "type": "commonjs",
   "scripts": {

@@ -4,6 +4,15 @@ import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginElectron } from 'rsbuild-plugin-electron';
 
 export default defineConfig({
+  html: {
+    title: '小镇事务所 · 管理系统经营游戏',
+    meta: {
+      'Content-Security-Policy': {
+        'http-equiv': 'Content-Security-Policy',
+        content: `default-src 'self'; script-src 'self'${process.env.NODE_ENV === 'production' ? '' : " 'unsafe-eval'"}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws:; object-src 'none'; base-uri 'self'`,
+      },
+    },
+  },
   server: {
     port: 7712,
     printUrls(params) {
@@ -38,7 +47,7 @@ export default defineConfig({
       },
     },
     node: {
-      plugins: [pluginElectron()],
+      plugins: process.env.BROWSER_ONLY === '1' ? [] : [pluginElectron()],
       resolve: {
         alias: {
           '@main': path.resolve('./src/main'),
@@ -55,6 +64,7 @@ export default defineConfig({
       },
       output: {
         target: 'node',
+        externals: ['electron'],
         distPath: {
           root: './packer/dist-electron',
         },
